@@ -214,9 +214,38 @@
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="assets/js/getAllURLParams.js"></script>
-	<script>
-	console.log(getAllUrlParams().page);
-	</script>
-      
+    <script>
+    console.log(getAllUrlParams().page);
+    </script>
+
+    <!--loads data from jason file-->
+    <script type="text/javascript" src="assets/data/data.json"></script>
+
+    <!--adds data to webpage-->
+    <script>
+      var mydata = JSON.parse(data);
+      var elements = document.getElementsByClassName("card-text");
+        for (var i = 0; i < elements.length; i++) {
+          elements[i].innerHTML = mydata[i].name;
+        }
+        var elements = document.getElementsByTagName("small");
+        for (var i = 0; i < elements.length; i++) {
+          elements[i].innerHTML = mydata[i].type;
+        }
+    </script>
+
+    <!--loads images from jason file (todo: fix this)-->
+    <script type="text/javascript" src="assets/data/pictures.json"></script>
+    
+    <!--adds images to webpage (todo: fix this)-->
+    <script>
+      var mypictures = JSON.parse(images);
+      var elements = document.getElementsByClassName("bd-placeholder-img card-img-top").src;
+      for (var i = 0; i < elements.length; i++) {
+          elements[i].innerHTML = mypictures[i];
+        }
+    </script>
+
+
   </body>
 </html>
