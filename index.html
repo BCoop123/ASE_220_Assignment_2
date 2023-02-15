@@ -252,7 +252,7 @@
       var elements = document.querySelectorAll(".btn");
       for (var i = 0; i < elements.length; i++) {
         var id = i;
-        elements[i].outerHTML = `<button type="button" onclick="location.href = 'detail.html?${id}';" class="btn btn-sm btn-outline-secondary">View</button>`
+        elements[i].outerHTML = `<button type="button" onclick="location.href = 'detail.html?id=${id}';" class="btn btn-sm btn-outline-secondary">View</button>`
         }
     </script>
 
