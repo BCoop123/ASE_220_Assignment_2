@@ -54,4 +54,6 @@ for section in sections:
 
 # Write the JSON data to a file
 with open('data.json', 'w') as f:
+    f.write("data = '")
     json.dump(json_data, f)
+    f.write("'")
