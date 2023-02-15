@@ -227,6 +227,13 @@
     <!--javascript for displaying info, images, and buttons-->
     <script>
       
+      //sets the cards per page to 6
+      var elements = document.getElementsByClassName("col");
+      for(i = 0; i < elements.length; i++)
+        if (i >= 4 && i<= 8) {
+          elements[i].outerHTML = "";
+        }
+
       //checks if page is any other page then page 1
       pet = 0;
       
@@ -277,7 +284,6 @@
       for (var i = 0; i < mydata.length; i++)
         if (parseInt(mydata[i].id) == pet) {
           pet = i;
-          console.log(pet)
         }
 
       //adds next page button to footer
