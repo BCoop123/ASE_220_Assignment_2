@@ -221,24 +221,27 @@
     <!--loads data from jason file-->
     <script type="text/javascript" src="assets/data/data.json"></script>
 
+    <!--loads images from jason file-->
+    <script type="text/javascript" src="assets/data/pictures.json"></script>
+
     <!--adds data to webpage-->
+    <!--on button click redirect to a unique page-->
+    <!--adds images to webpage-->
     <script>
       var mydata = JSON.parse(data);
       var elements = document.getElementsByClassName("card-text");
-        for (var i = 0; i < elements.length; i++) {
-          elements[i].innerHTML = mydata[i].name;
-        }
-        var elements = document.getElementsByTagName("small");
-        for (var i = 0; i < elements.length; i++) {
-          elements[i].innerHTML = mydata[i].type;
-        }
-    </script>
-
-    <!--loads images from jason file-->
-    <script type="text/javascript" src="assets/data/pictures.json"></script>
-    
-    <!--adds images to webpage-->
-    <script>
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].innerHTML = mydata[i].name;
+      }
+      var elements = document.getElementsByTagName("small");
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].innerHTML = mydata[i].type;
+      }
+      var elements = document.querySelectorAll(".btn");
+      for (var i = 0; i < elements.length; i++) {
+        var id = mydata[i].id.trim();
+        elements[i].outerHTML = `<button type="button" onclick="location.href = 'detail.html?id=${id}';" class="btn btn-sm btn-outline-secondary">View</button>`
+      }
       var mypictures = JSON.parse(pictures);
       var elements = document.querySelectorAll(".card-img-top");
       for (var i = 0; i < elements.length; i++) {
@@ -246,15 +249,5 @@
         elements[i].outerHTML = `<img src="${picture}" width="100%" height="225">`
         }
     </script>
-
-    <!--on button click redirect to a unique page-->
-    <script>
-      var elements = document.querySelectorAll(".btn");
-      for (var i = 0; i < elements.length; i++) {
-        var id = i;
-        elements[i].outerHTML = `<button type="button" onclick="location.href = 'detail.html?id=${id}';" class="btn btn-sm btn-outline-secondary">View</button>`
-        }
-    </script>
-
   </body>
 </html>
