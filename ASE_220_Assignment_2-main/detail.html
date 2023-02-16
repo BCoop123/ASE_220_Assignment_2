@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Album example · Bootstrap v5.0</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+  </head>
+  <body>
+    
+<header>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+        <strong>Pet adoption website</strong>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="album py-5">
+    <div class="container">
+	<h1>Pet name</h1>
+	<div id="info">Pet info goes here</div>
+	<hr />
+	<h2>Image Gallery</h2>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="text-muted py-5">
+  <div class="container">
+    <p class="float-end mb-1">
+      <a href="#">Back to top</a>
+    </p>
+  </div>
+</footer>
+
+
+    <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/js/getAllURLParams.js"></script>
+	<script>
+	console.log(getAllUrlParams().pet);
+	</script>
+  
+  <!--loads data from jason file-->
+  <script type="text/javascript" src="assets/data/data.json"></script>
+
+  <!--loads images from jason file-->
+  <script type="text/javascript" src="assets/data/pictures.json"></script>
+
+  <!--todo: remove id from html and instead access using childNode selectors-->
+  <!--script for adding data and images-->
+  <script>
+    //assign data based on id
+    var mydata = JSON.parse(data);
+    var elements = document.querySelectorAll("h1");
+    var pet = getAllUrlParams().id;
+    
+    //changes pet to be the index of the pet in the json file based on the pet's id
+    for (var i = 0; i < mydata.length; i++)
+      if (parseInt(mydata[i].id) == pet) {
+        pet = i;
+      }
+    
+    //wrties pet name to page
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].innerHTML = mydata[pet].name;
+    }
+
+    //writes pet data to page
+    var elements = document.querySelectorAll("#info");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].innerHTML = `
+      Breed: ${mydata[pet].breed}<br>
+      Fixed: ${mydata[pet].fixed}<br>
+      Gender: ${mydata[pet].gender}<br>
+      ID: ${mydata[pet].id}<br>
+      Vaccination status: ${mydata[pet].vacStatus}<br>
+      Location: ${mydata[pet].location}<br>
+      Available for adoption: ${mydata[pet].available}<br>
+      Type: ${mydata[pet].type}<br>
+      Additional details: ${mydata[pet].details}
+      `;
+    }
+    //assign images based on id
+    var mypictures = JSON.parse(pictures);
+    var elements = document.querySelectorAll(".card-img-top");
+    for (var i = 0; i < elements.length; i++) {
+      var picture1 = mypictures.image_links[pet];
+      var picture2 = mypictures.image_links[pet];
+      var picture3 = mypictures.image_links[pet];
+      elements[i].outerHTML = `<img src="${picture2}" width="100%" height="225">`
+    }
+
+    //Back button on details page in footer below
+    page = parseInt(getAllUrlParams().page);
+    var elements = document.getElementsByTagName("footer");
+    elements[0].innerHTML += `<button type="button" onclick="location.href = 'index.html?page=${page}';" class="btn btn-sm btn-outline-secondary" style="margin: 20px;">Back</button>`
+
+    //Below Updates the Title of the page to reflect the pets name
+    var elements = document.querySelectorAll("title");
+    elements[0].innerHTML = `${mydata[pet].name} the ${mydata[pet].type}`;
+
+    //changes background color depending on pet gender
+    if (mydata[pet].gender.includes("Female")) {
+      document.body.style.background = "#ffccff";
+    }
+    else if(mydata[pet].gender.includes("Male")){
+      document.body.style.background = "#cceeff";
+    }
+  </script>
+  </body>
+</html>
