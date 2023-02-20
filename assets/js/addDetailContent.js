@@ -19,6 +19,7 @@ var newInfo = `
         Breed: ${mydata[pet].breed}<br>
         Fixed: ${mydata[pet].fixed}<br>
         Gender: ${mydata[pet].gender}<br>
+        Age: ${mydata[pet].age}<br>
         ID: ${mydata[pet].id}<br>
         Vaccination status: ${mydata[pet].vacStatus}<br>
         Location: ${mydata[pet].location}<br>

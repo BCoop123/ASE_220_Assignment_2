@@ -1,4 +1,5 @@
 import json
+import random
 
 # Open the input file and read its contents
 with open('data.txt', 'r') as f:
@@ -10,6 +11,7 @@ sections = ''.join(lines).split('* * *\n')
 # Create an empty list to hold the JSON data
 json_data = []
 
+#random.shuffle(sections)
 for section in sections:
     section_data = {}
     # Split the section into lines and use the order of the lines to determine the field names
@@ -43,7 +45,11 @@ for section in sections:
         if "Location" in i:
             section_data['location'] = i.split(":")[1]
         if "Available for" in i:
-            section_data['available'] = i.split(":")[1]
+            randomNum = random.randint(0, 1)
+            if randomNum == 1:
+                section_data['available'] = "yes"
+            if randomNum == 0:
+                section_data['available'] = "no"
         if "Type" in i:
             section_data['type'] = i.split(":")[1]
         if "Additional details" in i:
